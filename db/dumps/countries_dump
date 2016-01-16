@@ -1,0 +1,358 @@
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 9.3.6
+-- Dumped by pg_dump version 9.3.6
+-- Started on 2015-04-10 16:23:27 EEST
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+
+SET search_path = public, pg_catalog;
+
+SET default_tablespace = '';
+
+SET default_with_oids = false;
+
+--
+-- TOC entry 263 (class 1259 OID 270182)
+-- Name: countries; Type: TABLE; Schema: public; Owner: booya; Tablespace: 
+--
+
+CREATE TABLE countries (
+    id integer NOT NULL,
+    name character varying(255),
+    code character varying(255),
+    url character(50),
+    latitude double precision,
+    longitude double precision,
+    states integer
+);
+
+
+ALTER TABLE public.countries OWNER TO booya;
+
+--
+-- TOC entry 262 (class 1259 OID 270180)
+-- Name: countries_id_seq; Type: SEQUENCE; Schema: public; Owner: booya
+--
+
+CREATE SEQUENCE countries_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.countries_id_seq OWNER TO booya;
+
+--
+-- TOC entry 2251 (class 0 OID 0)
+-- Dependencies: 262
+-- Name: countries_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: booya
+--
+
+ALTER SEQUENCE countries_id_seq OWNED BY countries.id;
+
+
+--
+-- TOC entry 2134 (class 2604 OID 270185)
+-- Name: id; Type: DEFAULT; Schema: public; Owner: booya
+--
+
+ALTER TABLE ONLY countries ALTER COLUMN id SET DEFAULT nextval('countries_id_seq'::regclass);
+
+
+--
+-- TOC entry 2246 (class 0 OID 270182)
+-- Dependencies: 263
+-- Data for Name: countries; Type: TABLE DATA; Schema: public; Owner: booya
+--
+
+COPY countries (id, name, code, url, latitude, longitude, states) FROM stdin;
+4	Andorra	AD	andorra                                           	42.5	1.5	7
+5	United Arab Emirates	AE	united-arab-emirates                              	24	54	7
+6	Afghanistan	AF	afghanistan                                       	33	65	35
+7	Antigua and Barbuda	AG	antigua-and-barbuda                               	17.0500000000000007	-61.7999999999999972	7
+8	Anguilla	AI	anguilla                                          	18.25	-63.1666999999999987	0
+9	Albania	AL	albania                                           	41	20	12
+10	Armenia	AM	armenia                                           	40	45	11
+11	Netherlands Antilles	AN	netherlands-antilles                              	12.25	-68.75	0
+12	Angola	AO	angola                                            	-12.5	18.5	17
+13	Antarctica	AQ	antarctica                                        	-90	0	0
+14	Argentina	AR	argentina                                         	-34	-64	24
+15	American Samoa	AS	american-samoa                                    	-14.3332999999999995	-170	0
+16	Austria	AT	austria                                           	47.3333000000000013	13.3332999999999995	9
+17	Australia	AU	australia                                         	-27	133	8
+18	Aruba	AW	aruba                                             	12.5	-69.966700000000003	0
+19	Aland IslandsÅland Islands	AX	aland-islands                                     	0.100000000000000006	0.100000000000000006	0
+20	Azerbaijan	AZ	azerbaijan                                        	40.5	47.5	71
+21	Bosnia and Herzegovina	BA	bosnia-and-herzegovina                            	44	18	2
+22	Barbados	BB	barbados                                          	13.1667000000000005	-59.533299999999997	11
+23	Bangladesh	BD	bangladesh                                        	24	90	64
+24	Belgium	BE	belgium                                           	50.8333000000000013	4	12
+25	Burkina Faso	BF	burkina-faso                                      	13	-2	45
+26	Bulgaria	BG	bulgaria                                          	43	25	29
+27	Bahrain	BH	bahrain                                           	26	50.5499999999999972	12
+28	Burundi	BI	burundi                                           	-3.5	30	16
+29	Benin	BJ	benin                                             	9.5	2.25	6
+30	Bermuda	BM	bermuda                                           	32.3333000000000013	-64.75	11
+31	Brunei Darussalam	BN	brunei-darussalam                                 	4.5	114.666700000000006	12
+32	BoliviaBolivia, Plurinational state of	BO	bolivia                                           	-17	-65	9
+33	Brazil	BR	brazil                                            	-10	-55	27
+34	Bahamas	BS	bahamas                                           	24.25	-76	21
+35	Bhutan	BT	bhutan                                            	27.5	90.5	18
+36	Bouvet Island	BV	bouvet-island                                     	-54.4333000000000027	3.39999999999999991	0
+37	Botswana	BW	botswana                                          	-22	24	10
+38	Belarus	BY	belarus                                           	53	28	7
+39	Belize	BZ	belize                                            	17.25	-88.75	6
+40	Canada	CA	canada                                            	60	-95	13
+41	Cocos (Keeling) Islands	CC	cocos-keeling-islands                             	-12.5	96.8332999999999942	0
+42	Congo, The Democratic Republic of the	CD	congo-the-democratic-republic-of-the              	-4.03833299999999973	21.7586639999999996	12
+43	Central African Republic	CF	central-african-republic                          	7	21	17
+44	Congo	CG	congo                                             	-1	15	10
+45	Switzerland	CH	switzerland                                       	47	8	26
+46	Côte d'Ivoire	CI	cote-d-ivoire                                     	8	-5	57
+47	Cook Islands	CK	cook-islands                                      	-21.2332999999999998	-159.766699999999986	0
+48	Chile	CL	chile                                             	-30	-71	13
+49	Cameroon	CM	cameroon                                          	6	12	10
+50	China	CN	china                                             	35	105	31
+51	Colombia	CO	colombia                                          	4	-72	33
+52	Costa Rica	CR	costa-rica                                        	10	-84	7
+53	Cuba	CU	cuba                                              	21.5	-80	15
+54	Cape Verde	CV	cape-verde                                        	16	-24	16
+55	Christmas Island	CX	christmas-island                                  	-10.5	105.666700000000006	0
+56	Cyprus	CY	cyprus                                            	35	33	6
+57	Czech Republic	CZ	czech-republic                                    	49.75	15.5	29
+58	Germany	DE	germany                                           	51	9	16
+59	Djibouti	DJ	djibouti                                          	11.5	43	4
+60	Denmark	DK	denmark                                           	56	10	15
+61	Dominica	DM	dominica                                          	15.4167000000000005	-61.3333000000000013	10
+62	Dominican Republic	DO	dominican-republic                                	19	-70.6667000000000058	30
+63	Algeria	DZ	algeria                                           	28	3	48
+64	Ecuador	EC	ecuador                                           	-2	-77.5	22
+65	Estonia	EE	estonia                                           	59	26	21
+66	Egypt	EG	egypt                                             	27	30	26
+67	Western Sahara	EH	western-sahara                                    	24.5	-13	0
+68	Eritrea	ER	eritrea                                           	15	39	0
+69	Spain	ES	spain                                             	40	-4	17
+70	Ethiopia	ET	ethiopia                                          	8	38	19
+71	Finland	FI	finland                                           	64	26	6
+72	Fiji	FJ	fiji                                              	-18	175	5
+73	Falkland Islands (Malvinas)	FK	falkland-islands-malvinas                         	-51.75	-59	0
+74	Micronesia, Federated States of	FM	micronesia-federated-states-of                    	6.91669999999999963	158.25	4
+75	Faroe Islands	FO	faroe-islands                                     	62	-7	0
+76	France	FR	france                                            	46	2	22
+77	Gabon	GA	gabon                                             	-1	11.75	9
+78	United Kingdom	GB	united-kingdom                                    	54	-2	252
+79	Grenada	GD	grenada                                           	12.1166999999999998	-61.6666999999999987	6
+80	Georgia	GE	georgia                                           	42	43.5	64
+81	French Guiana	GF	french-guiana                                     	4	-53	0
+82	Guernsey	GG	guernsey                                          	49.4656909999999996	-2.58527800000000019	0
+83	Ghana	GH	ghana                                             	8	-2	10
+84	Gibraltar	GI	gibraltar                                         	36.1833000000000027	-5.3666999999999998	0
+85	Greenland	GL	greenland                                         	72	-40	3
+86	Gambia	GM	gambia                                            	13.4666999999999994	-16.5667000000000009	6
+87	Guinea	GN	guinea                                            	11	-10	34
+88	Guadeloupe	GP	guadeloupe                                        	16.25	-61.5833000000000013	0
+89	Equatorial Guinea	GQ	equatorial-guinea                                 	2	10	7
+90	Greece	GR	greece                                            	39	22	51
+91	South Georgia and the South Sandwich Islands	GS	south-georgia-and-the-south-sandwich-islands      	-54.5	-37	0
+92	Guatemala	GT	guatemala                                         	15.5	-90.25	22
+93	Guam	GU	guam                                              	13.4666999999999994	144.783299999999997	0
+94	Guinea-Bissau	GW	guinea-bissau                                     	12	-15	9
+95	Guyana	GY	guyana                                            	5	-59	10
+96	Hong Kong	HK	hong-kong                                         	22.25	114.166700000000006	0
+97	Heard Island and McDonald Islands	HM	heard-island-and-mcdonald-islands                 	-53.1000000000000014	72.5167000000000002	0
+98	Honduras	HN	honduras                                          	15	-86.5	18
+99	Croatia	HR	croatia                                           	45.1666999999999987	15.5	21
+100	Haiti	HT	haiti                                             	19	-72.4167000000000058	9
+101	Hungary	HU	hungary                                           	47	20	40
+102	Indonesia	ID	indonesia                                         	-5	120	30
+103	Ireland	IE	ireland                                           	53	-8	26
+104	Israel	IL	israel                                            	31.5	34.75	6
+105	Isle of Man	IM	isle-of-man                                       	54.236106999999997	-4.54805599999999988	0
+106	India	IN	india                                             	20	77	35
+107	British Indian Ocean Territory	IO	british-indian-ocean-territory                    	-6	71.5	0
+108	Iraq	IQ	iraq                                              	33	44	18
+109	Iran, Islamic Republic of	IR	iran-islamic-republic-of                          	32	53	28
+110	Iceland	IS	iceland                                           	65	-18	37
+111	Italy	IT	italy                                             	42.8333000000000013	12.8332999999999995	20
+112	Jersey	JE	jersey                                            	49.2144389999999987	-2.13125000000000009	0
+113	Jamaica	JM	jamaica                                           	18.25	-77.5	14
+114	Jordan	JO	jordan                                            	31	36	8
+115	Japan	JP	japan                                             	36	138	47
+116	Kenya	KE	kenya                                             	1	38	8
+117	Kyrgyzstan	KG	kyrgyzstan                                        	41	75	8
+118	Cambodia	KH	cambodia                                          	13	105	20
+119	Kiribati	KI	kiribati                                          	1.41670000000000007	173	3
+120	Comoros	KM	comoros                                           	-12.1667000000000005	44.25	3
+121	Saint Kitts and Nevis	KN	saint-kitts-and-nevis                             	17.3333000000000013	-62.75	14
+122	Korea, Democratic People&#39;s Republic of	KP	korea-democratic-people-s-republic-of             	40	127	13
+123	Korea, Republic of	KR	korea-republic-of                                 	37	127.5	16
+124	Kuwait	KW	kuwait                                            	29.5	45.75	4
+125	Cayman Islands	KY	cayman-islands                                    	19.5	-80.5	8
+126	Kazakhstan	KZ	kazakhstan                                        	48	68	17
+127	Lao People&#39;s Democratic Republic	LA	lao-people-s-democratic-republic                  	18	105	13
+128	Lebanon	LB	lebanon                                           	33.8333000000000013	35.8333000000000013	6
+129	Saint Lucia	LC	saint-lucia                                       	13.8833000000000002	-61.1332999999999984	11
+130	Liechtenstein	LI	liechtenstein                                     	47.1666999999999987	9.53330000000000055	11
+131	Sri Lanka	LK	sri-lanka                                         	7	81	24
+132	Liberia	LR	liberia                                           	6.5	-9.5	10
+133	Lesotho	LS	lesotho                                           	-29.5	28.5	10
+134	Lithuania	LT	lithuania                                         	56	24	10
+135	Luxembourg	LU	luxembourg                                        	49.75	6.16669999999999963	3
+136	Latvia	LV	latvia                                            	57	25	33
+137	Libyan Arab Jamahiriya	LY	libyan-arab-jamahiriya                            	25	17	25
+138	Morocco	MA	morocco                                           	32	-5	39
+139	Monaco	MC	monaco                                            	43.7332999999999998	7.40000000000000036	3
+140	Moldova, Republic of	MD	moldova-republic-of                               	47	29	11
+141	Montenegro	ME	montenegro                                        	42.5726379999999978	18.8077560000000013	0
+142	Saint Martin	MF	saint-martin                                      	0	0	0
+143	Madagascar	MG	madagascar                                        	-20	47	6
+144	Marshall Islands	MH	marshall-islands                                  	9	168	0
+145	Macedonia	MK	macedonia                                         	41.8333000000000013	22	123
+146	Mali	ML	mali                                              	17	-4	9
+147	Myanmar	MM	myanmar                                           	21.913965000000001	95.9562229999999943	15
+148	Mongolia	MN	mongolia                                          	46	105	24
+149	Macao	MO	macao                                             	22.1666999999999987	113.549999999999997	2
+150	Northern Mariana Islands	MP	northern-mariana-islands                          	15.1999999999999993	145.75	0
+151	Martinique	MQ	martinique                                        	14.6667000000000005	-61	0
+152	Mauritania	MR	mauritania                                        	20	-12	12
+153	Montserrat	MS	montserrat                                        	16.75	-62.2000000000000028	3
+154	Malta	MT	malta                                             	35.8333000000000013	14.5832999999999995	0
+155	Mauritius	MU	mauritius                                         	-20.2833000000000006	57.5499999999999972	12
+156	Maldives	MV	maldives                                          	3.25	73	19
+157	Malawi	MW	malawi                                            	-13.5	34	27
+158	Mexico	MX	mexico                                            	23	-102	32
+159	Malaysia	MY	malaysia                                          	2.5	112.5	15
+160	Mozambique	MZ	mozambique                                        	-18.25	35	10
+161	Namibia	NA	namibia                                           	-22	17	38
+162	New Caledonia	NC	new-caledonia                                     	-21.5	165.5	0
+163	Niger	NE	niger                                             	16	8	7
+164	Norfolk Island	NF	norfolk-island                                    	-29.0333000000000006	167.949999999999989	0
+165	Nigeria	NG	nigeria                                           	10	8	37
+166	Nicaragua	NI	nicaragua                                         	13	-85	16
+167	Netherlands	NL	netherlands                                       	52.5	5.75	16
+168	Norway	NO	norway                                            	62	10	19
+169	Nepal	NP	nepal                                             	28	84	14
+170	Nauru	NR	nauru                                             	-0.533299999999999996	166.916699999999992	14
+171	Niue	NU	niue                                              	-19.0333000000000006	-169.866700000000009	0
+172	New Zealand	NZ	new-zealand                                       	-41	174	105
+173	Oman	OM	oman                                              	21	57	8
+174	Panama	PA	panama                                            	9	-80	10
+175	Peru	PE	peru                                              	-10	-76	25
+176	French Polynesia	PF	french-polynesia                                  	-15	-140	0
+177	Papua New Guinea	PG	papua-new-guinea                                  	-6	147	20
+178	Philippines	PH	philippines                                       	13	122	134
+179	Pakistan	PK	pakistan                                          	30	70	8
+180	Poland	PL	poland                                            	52	20	65
+181	Saint Pierre and Miquelon	PM	saint-pierre-and-miquelon                         	46.8333000000000013	-56.3333000000000013	0
+182	Pitcairn	PN	pitcairn                                          	-24.7036149999999992	-127.439307999999997	0
+183	Puerto Rico	PR	puerto-rico                                       	18.25	-66.5	0
+184	Palestinian Territory, Occupied	PS	palestinian-territory                             	32	35.25	0
+185	Portugal	PT	portugal                                          	39.5	-8	20
+186	Palau	PW	palau                                             	7.5	134.5	0
+187	Paraguay	PY	paraguay                                          	-23	-58	19
+188	Qatar	QA	qatar                                             	25.5	51.25	10
+189	Réunion	RE	reunion                                           	-21.1000000000000014	55.6000000000000014	0
+190	Romania	RO	romania                                           	46	25	42
+191	Serbia	RS	serbia                                            	44.015194000000001	20.7291640000000008	0
+192	Russian Federation	RU	russian-federation                                	60	100	89
+193	Rwanda	RW	rwanda                                            	-2	30	10
+194	Saudi Arabia	SA	saudi-arabia                                      	25	45	14
+195	Solomon Islands	SB	solomon-islands                                   	-8	159	7
+196	Seychelles	SC	seychelles                                        	-4.58330000000000037	55.6666999999999987	23
+197	Sudan	SD	sudan                                             	15	30	8
+198	Sweden	SE	sweden                                            	62	15	26
+199	Singapore	SG	singapore                                         	1.36670000000000003	103.799999999999997	0
+200	Saint Helena	SH	saint-helena                                      	-15.9332999999999991	-5.70000000000000018	3
+201	Slovenia	SI	slovenia                                          	46	15	141
+202	Svalbard and Jan Mayen	SJ	svalbard-and-jan-mayen                            	78	20	0
+203	Slovakia	SK	slovakia                                          	48.6666999999999987	19.5	8
+204	Sierra Leone	SL	sierra-leone                                      	8.5	-11.5	4
+205	San Marino	SM	san-marino                                        	43.7667000000000002	12.4167000000000005	9
+206	Senegal	SN	senegal                                           	14	-14	10
+207	Somalia	SO	somalia                                           	10	49	16
+208	Suriname	SR	suriname                                          	4	-56	10
+209	Sao Tome and Principe	ST	sao-tome-and-principe                             	1	7	2
+210	El Salvador	SV	el-salvador                                       	13.8332999999999995	-88.9167000000000058	14
+211	Syrian Arab Republic	SY	syrian-arab-republic                              	35	38	14
+212	Swaziland	SZ	swaziland                                         	-26.5	31.5	5
+213	Turks and Caicos Islands	TC	turks-and-caicos-islands                          	21.75	-71.5832999999999942	0
+214	Chad	TD	chad                                              	15	19	14
+215	French Southern Territories	TF	french-southern-territories                       	-49.4499599999999973	70.0249819999999943	0
+216	Togo	TG	togo                                              	8	1.16670000000000007	21
+217	Thailand	TH	thailand                                          	15	100	73
+218	Tajikistan	TJ	tajikistan                                        	39	71	3
+219	Tokelau	TK	tokelau                                           	-9	-172	0
+220	Timor-Leste	TL	timor-leste                                       	-8.8742169999999998	125.727538999999993	0
+221	Turkmenistan	TM	turkmenistan                                      	40	60	5
+222	Tunisia	TN	tunisia                                           	34	9	24
+223	Tonga	TO	tonga                                             	-20	-175	3
+224	Turkey	TR	turkey                                            	39	35	81
+225	Trinidad and Tobago	TT	trinidad-and-tobago                               	11	-61	12
+226	Tuvalu	TV	tuvalu                                            	-8	178	0
+227	Taiwan	TW	taiwan                                            	23.5	121	4
+228	Tanzania, United Republic of	TZ	tanzania-united-republic-of                       	-6	35	25
+229	Ukraine	UA	ukraine                                           	49	32	27
+230	Uganda	UG	uganda                                            	1	32	38
+231	United States Minor Outlying Islands	UM	united-states-minor-outlying-islands              	19.2833000000000006	166.599999999999994	0
+232	United States	US	united-states                                     	38	-97	62
+233	Uruguay	UY	uruguay                                           	-33	-56	19
+234	Uzbekistan	UZ	uzbekistan                                        	41	64	14
+235	Holy See (Vatican City State)	VA	holy-see-vatican-city-state                       	41.8999999999999986	12.4499999999999993	0
+236	Saint Vincent and the Grenadines	VC	saint-vincent-and-the-grenadines                  	13.25	-61.2000000000000028	6
+237	Venezuela, Bolivarian Republic of	VE	venezuela                                         	8	-66	25
+238	Virgin Islands, British	VG	virgin-islands-british                            	18.5	-64.5	0
+239	Virgin Islands, U.S.	VI	virgin-islands-us                                 	18.3333000000000013	-64.8332999999999942	0
+240	Viet Nam	VN	vietnam                                           	16	106	53
+241	Vanuatu	VU	vanuatu                                           	-16	167	14
+242	Wallis and Futuna	WF	wallis-and-futuna                                 	-13.3000000000000007	-176.199999999999989	0
+243	Samoa	WS	samoa                                             	-13.5832999999999995	-172.333300000000008	10
+244	Yemen	YE	yemen                                             	15	48	16
+245	Mayotte	YT	mayotte                                           	-12.8332999999999995	45.1666999999999987	0
+246	South Africa	ZA	south-africa                                      	-29	24	9
+247	Zambia	ZM	zambia                                            	-15	30	9
+248	Zimbabwe	ZW	zimbabwe                                          	-20	30	10
+\.
+
+
+--
+-- TOC entry 2252 (class 0 OID 0)
+-- Dependencies: 262
+-- Name: countries_id_seq; Type: SEQUENCE SET; Schema: public; Owner: booya
+--
+
+SELECT pg_catalog.setval('countries_id_seq', 248, true);
+
+
+--
+-- TOC entry 2137 (class 2606 OID 270187)
+-- Name: countries_pkey; Type: CONSTRAINT; Schema: public; Owner: booya; Tablespace: 
+--
+
+ALTER TABLE ONLY countries
+    ADD CONSTRAINT countries_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 2135 (class 1259 OID 270283)
+-- Name: countries_code_id; Type: INDEX; Schema: public; Owner: booya; Tablespace: 
+--
+
+CREATE INDEX countries_code_id ON countries USING btree (code);
+
+
+-- Completed on 2015-04-10 16:23:27 EEST
+
+--
+-- PostgreSQL database dump complete
+--
+

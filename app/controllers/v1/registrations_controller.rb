@@ -5,10 +5,12 @@ class V1::RegistrationsController < Devise::RegistrationsController
 
   # For sign up users
   def create
-    user = User.new(:email => params[:email],
-                    :password => params[:password],
-                    :fname => params[:first_name],
-                    :lname => params[:last_name]
+    user = User.new(email: params[:email],
+                    password: params[:password],
+                    fname: params[:first_name],
+                    lname: params[:last_name],
+                    birthday: params[:birthday],
+                    gender: params[:gender]
     )
     if user.save
       user.user_roles << UserRole.where(name: params[:user_roles])
@@ -35,6 +37,10 @@ class V1::RegistrationsController < Devise::RegistrationsController
       no_firstname_attempt
     elsif user.errors[:lname].present?
       no_lastname_attempt
+    elsif user.errors[:birthday].present?
+      no_birthday_attempt
+    elsif user.errors[:gender].present?
+      no_gender_attempt
     else
       warden.custom_failure!
       render :json => { :errors => user.errors, :code => 13},  :status=>422, :success => false
@@ -74,6 +80,18 @@ class V1::RegistrationsController < Devise::RegistrationsController
     warden.custom_failure!
     render :status => 422,
            :json => { :errors => "Firstname a required parameter for the request", :code => 12 },
+           :success => false
+  end
+  def no_birthday_attempt
+    warden.custom_failure!
+    render :status => 422,
+           :json => { :errors => "Birthday a required parameter for the request", :code => 13 },
+           :success => false
+  end
+  def no_gender_attempt
+    warden.custom_failure!
+    render :status => 422,
+           :json => { :errors => "Gender a required parameter for the request", :code => 14 },
            :success => false
   end
 end

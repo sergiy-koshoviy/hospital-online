@@ -30,6 +30,14 @@ class User < ActiveRecord::Base
 
   acts_as_token_authenticatable
 
+  validates_presence_of :fname, :on => :create
+  validates_presence_of :lname, :on => :create
+  validates_presence_of :birthday, :on => :create
+  validates_presence_of :gender, :on => :create
+
+  validates_length_of :fname, maximum: 60 #one utf-8 symbol = 1-4 char/bit max 255
+  validates_length_of :lname, maximum: 60
+
   before_create :do_before_create
 
   has_one :address

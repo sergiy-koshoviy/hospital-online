@@ -58,14 +58,10 @@ class V1::SessionsController < Devise::SessionsController
       firstName: user.fname,
       lastName: user.lname,
       email: user.email,
-      image: {
-          :fullsizeUrl => user.image.url,
-          :thumbnailUrl => user.image.try(:thumb).try(:url) },
-      gender: user.gender,
-      plan: user.plan,
-      status: user.status,
-      trial_already_used: user.trial_already_used,
-      registration_completed: user.registration_completed
+      # image: {
+      #     :fullsizeUrl => user.image.url,
+      #     :thumbnailUrl => user.image.try(:thumb).try(:url) },
+      gender: user.gender
     }
   end
 

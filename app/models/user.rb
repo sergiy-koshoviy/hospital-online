@@ -15,6 +15,8 @@
 #  last_sign_in_ip        :inet
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
+#  authentication_token   :string(255)
+#  gender                 :string(255)
 #
 
 class User < ActiveRecord::Base
@@ -22,4 +24,18 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
+
+  before_create :do_before_create
+
+  def to_param
+    uid
+  end
+
+  def do_before_create
+    make_uid
+  end
+
+  def make_uid
+    self.uid = ["#{self.fname} #{self.lname}".parameterize, rand(36**6).to_s(36)].join("-")
+  end
 end

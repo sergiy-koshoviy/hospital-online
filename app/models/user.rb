@@ -25,6 +25,8 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
+  acts_as_token_authenticatable
+
   before_create :do_before_create
 
   def to_param

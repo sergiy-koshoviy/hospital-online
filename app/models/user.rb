@@ -17,6 +17,9 @@
 #  updated_at             :datetime         not null
 #  authentication_token   :string(255)
 #  gender                 :string(255)
+#  fname                  :string(255)
+#  lname                  :string(255)
+#  uid                    :string(255)
 #
 
 class User < ActiveRecord::Base

@@ -72,7 +72,7 @@ class V1::SessionsController < Devise::SessionsController
   def invalid_login_attempt
     warden.custom_failure!
     render :status => 401,
-           :json => { :errors => ["User with specified username and password is not found"], code: 4 },
+           :json => { :errors => "User with specified username and password is not found", code: 4 },
            :success => false
   end
 
@@ -80,54 +80,54 @@ class V1::SessionsController < Devise::SessionsController
   def no_user_with_facebook_uid_or_email_attempt
     warden.custom_failure!
     render :status => 401,
-           :json => { :errors => ["User with specified facebook uid or email is not found"], code: 16 },
+           :json => { :errors => "User with specified facebook uid or email is not found", code: 16 },
            :success => false
   end
 
   def no_facebook_uid_oauth_token_attempt
     warden.custom_failure!
     render :status => 401,
-           :json => { :errors => ["Facebook uid and oauth token are required parameters for the request."], code: 13 },
+           :json => { :errors => "Facebook uid and oauth token are required parameters for the request.", code: 13 },
            :success => false
   end
 
   def no_facebook_uid_attempt
     warden.custom_failure!
     render :status => 401,
-           :json => { :errors => ["Facebook uid is a required parameter for the request."], code: 14 },
+           :json => { :errors => "Facebook uid is a required parameter for the request.", code: 14 },
            :success => false
   end
 
   def no_oauth_token_attempt
     warden.custom_failure!
     render :status => 401,
-           :json => { :errors => ["Auth token is a required parameter for the request."], code: 15 },
+           :json => { :errors => "Auth token is a required parameter for the request.", code: 15 },
            :success => false
   end
 
   def no_pass_attempt
     warden.custom_failure!
     render :status => 401,
-           :json => { :errors => ["Password is a required parameter for the request."], code: 2 },
+           :json => { :errors => "Password is a required parameter for the request.", code: 2 },
            :success => false
   end
 
   def no_email_password_attempt
     warden.custom_failure!
     render :status => 401,
-           :json => { :errors => ["Email and password are required parameters for the request."], code: 3 },
+           :json => { :errors => "Email and password are required parameters for the request.", code: 3 },
            :success => false
   end
 
   def no_email_attempt
     warden.custom_failure!
     render :status => 401,
-           :json => { :errors => ["Email is a required parameter for the request."], code: 1 },
+           :json => { :errors => "Email is a required parameter for the request.", code: 1 },
            :success => false
   end
 
   def failure
     render :status => 401,
-           :json => { :errors => ["Autorization Failed"], code: 0}
+           :json => { :errors => "Autorization Failed", code: 0}
   end
 end

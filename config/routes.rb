@@ -64,6 +64,7 @@ Rails.application.routes.draw do
       post 'users/login' => 'sessions#create', :as => 'login'
       get 'users/self/profile' => 'sessions#show', :as => 'logout'
       post 'users/signup' => 'registrations#create', :as => 'signup'
+      put 'users/update' => 'registrations#update', :as => 'update'
     end
   end
 end

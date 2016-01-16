@@ -1,5 +1,5 @@
 class V1::RegistrationsController < Devise::RegistrationsController
-  skip_before_filter :verify_authenticity_token
+  skip_before_filter :verify_authenticity_token, only: [:create]
 
   respond_to :json
 
@@ -24,6 +24,7 @@ class V1::RegistrationsController < Devise::RegistrationsController
                      #     fullsizeUrl: user.image.url,
                      #     thumbnailUrl: user.image.thumb.url },
                      roles: user.user_roles.pluck(:name),
+                     birthday: user.user_roles.pluck(:name),
                      gender: user.gender
              }, status: 201
 
@@ -44,6 +45,35 @@ class V1::RegistrationsController < Devise::RegistrationsController
     else
       warden.custom_failure!
       render :json => { :errors => user.errors, :code => 13},  :status=>422, :success => false
+    end
+  end
+
+  def update
+    update_params = {}
+    update_params[:growth] = params[:growth] if params[:growth]
+    update_params[:growth] = params[:blood_pressure] if params[:blood_pressure]
+
+    user = current_user
+
+    if update_params && user.update_attributes(update_params)
+      render json: { token: user.authentication_token,
+                     id: user.id,
+                     firstName: user.fname,
+                     lastName: user.lname,
+                     email: user.email,
+                     # image: {
+                     #     fullsizeUrl: user.image.url,
+                     #     thumbnailUrl: user.image.thumb.url },
+                     roles: user.user_roles.pluck(:name),
+                     birthday: user.user_roles.pluck(:name),
+                     gender: user.gender
+             }, status: 201
+    elsif update_params.blank?
+      warden.custom_failure!
+      render :json => { :errors => 'Params are blank', :code => 16},  :status=>422, :success => false
+    else
+      warden.custom_failure!
+      render :json => { :errors => user.errors, :code => 17},  :status=>422, :success => false
     end
   end
 
@@ -85,13 +115,13 @@ class V1::RegistrationsController < Devise::RegistrationsController
   def no_birthday_attempt
     warden.custom_failure!
     render :status => 422,
-           :json => { :errors => "Birthday a required parameter for the request", :code => 13 },
+           :json => { :errors => "Birthday a required parameter for the request", :code => 14 },
            :success => false
   end
   def no_gender_attempt
     warden.custom_failure!
     render :status => 422,
-           :json => { :errors => "Gender a required parameter for the request", :code => 14 },
+           :json => { :errors => "Gender a required parameter for the request", :code => 15 },
            :success => false
   end
 end

@@ -32,6 +32,10 @@ class User < ActiveRecord::Base
 
   before_create :do_before_create
 
+  has_one :address
+
+  has_and_belongs_to_many :user_roles, :uniq => true
+
   def to_param
     uid
   end

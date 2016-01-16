@@ -15,8 +15,6 @@
 #
 
 class State < ActiveRecord::Base
-  attr_accessible :country_id, :code, :url, :name, :cities
-
   belongs_to :country
 
   def self.prepare_list

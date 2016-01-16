@@ -14,8 +14,6 @@
 #
 
 class Country < ActiveRecord::Base
-  attr_accessible :name, :code, :url, :states
-
   has_many :states
 
   def self.prepare_list

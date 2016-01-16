@@ -15,8 +15,6 @@
 #
 
 class Address < ActiveRecord::Base
-  attr_accessible :address_line1, :address_line2, :city, :country_id, :state_id, :user_id, :zip_code
-
   belongs_to :user
   belongs_to :country
   belongs_to :state

@@ -1,4 +1,6 @@
 class V1::RegistrationsController < Devise::RegistrationsController
+  skip_before_filter :verify_authenticity_token
+
   respond_to :json
 
   # For sign up users
@@ -6,17 +8,21 @@ class V1::RegistrationsController < Devise::RegistrationsController
     user = User.new(:email => params[:email],
                     :password => params[:password],
                     :fname => params[:first_name],
-                    :lname => params[:last_name])
+                    :lname => params[:last_name]
+    )
     if user.save
-      render json: { :"token" => user.authentication_token,
-                     :"id" => user.id,
-                     :"firstName" => user.fname,
-                     :"lastName" => user.lname,
-                     :"email" => user.email,
-                     # :"image"  => {
-                     #     :fullsizeUrl => user.image.url,
-                     #     :thumbnailUrl => user.image.thumb.url },
-                     :"gender" => user.gender
+      user.user_roles << UserRole.where(name: params[:user_roles])
+
+      render json: { token: user.authentication_token,
+                     id: user.id,
+                     firstName: user.fname,
+                     lastName: user.lname,
+                     email: user.email,
+                     # image: {
+                     #     fullsizeUrl: user.image.url,
+                     #     thumbnailUrl: user.image.thumb.url },
+                     roles: user.user_roles.pluck(:name),
+                     gender: user.gender
              }, status: 201
 
     elsif user.errors[:email].present? and user.errors[:email][0] == "has already been taken"

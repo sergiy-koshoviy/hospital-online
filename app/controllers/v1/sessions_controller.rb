@@ -61,6 +61,7 @@ class V1::SessionsController < Devise::SessionsController
       # image: {
       #     :fullsizeUrl => user.image.url,
       #     :thumbnailUrl => user.image.try(:thumb).try(:url) },
+      roles: user.user_roles.pluck(:name),
       gender: user.gender
     }
   end

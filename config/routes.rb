@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
-  devise_for :users
+  devise_for :user, :path => '', :path_names => { :sign_in => "signin",
+                                                  :sign_out => "signout",
+                                                  :sign_up => "signup" },
+             :controllers => { :registrations => 'registrations'}
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
@@ -54,4 +57,13 @@ Rails.application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
+
+  namespace :v1, path: '1.0', defaults: {format: 'json'} do
+    # Autorization and registration
+    devise_scope :user do
+      post 'users/login' => 'sessions#create', :as => 'login'
+      get 'users/self/profile' => 'sessions#show', :as => 'logout'
+      post 'users/signup' => 'registrations#create', :as => 'signup'
+    end
+  end
 end

@@ -129,6 +129,7 @@
     <orderEntry type="library" scope="PROVIDED" name="activemodel (v4.1.10, RVM: ruby-2.2.1 [hospital-online]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="activerecord (v4.1.10, RVM: ruby-2.2.1 [hospital-online]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="activesupport (v4.1.10, RVM: ruby-2.2.1 [hospital-online]) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="annotate (v2.7.0, RVM: ruby-2.2.1 [hospital-online]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="arel (v5.0.1.20140414130214, RVM: ruby-2.2.1 [hospital-online]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="bcrypt (v3.1.10, RVM: ruby-2.2.1 [hospital-online]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="builder (v3.2.2, RVM: ruby-2.2.1 [hospital-online]) [gem]" level="application" />

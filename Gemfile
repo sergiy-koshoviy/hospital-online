@@ -40,3 +40,6 @@ gem 'spring',        group: :development
 
 #auth
 gem 'devise'
+
+# Annotate models
+gem 'annotate'

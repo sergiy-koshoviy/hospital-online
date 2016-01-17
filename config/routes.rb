@@ -66,5 +66,8 @@ Rails.application.routes.draw do
       post 'users/signup' => 'registrations#create', :as => 'signup'
       post 'users/update_profile' => 'registrations#update_profile', :as => 'update'
     end
+
+    # resources :medical_histories
+    post 'medical_histories/create' => 'medical_histories#create'
   end
 end

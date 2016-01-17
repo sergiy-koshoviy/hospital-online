@@ -1,5 +1,5 @@
 class V1::RegistrationsController < Devise::RegistrationsController
-  skip_before_filter :verify_authenticity_token, only: [:create, :update_profile]
+  skip_before_filter :verify_authenticity_token, only: [:create]
 
   respond_to :json
 
@@ -38,7 +38,7 @@ class V1::RegistrationsController < Devise::RegistrationsController
   end
 
   def update_profile
-    user = User.last
+    user = current_user
 
     if user_params.present? && user.update_attributes(user_params)
       render json: get_user_data(user), status: 201

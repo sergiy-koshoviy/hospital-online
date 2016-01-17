@@ -46,6 +46,8 @@ class User < ActiveRecord::Base
 
   has_one :address
 
+  has_many :medical_histories
+
   has_and_belongs_to_many :user_roles, :uniq => true
 
   accepts_nested_attributes_for :address

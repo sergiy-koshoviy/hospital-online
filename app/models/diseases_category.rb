@@ -8,5 +8,7 @@
 #
 
 class DiseasesCategory < ActiveRecord::Base
-    belongs_to :doctors_categories
+  belongs_to :doctors_categories
+
+  has_many :medical_histories
 end

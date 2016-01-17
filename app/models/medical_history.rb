@@ -12,7 +12,7 @@
 
 class MedicalHistory < ActiveRecord::Base
 
-  validates_presence_of :user_id, :diseases_categories_id
+  validates_presence_of :user_id, :diseases_category_id
 
   belongs_to :user
   belongs_to :diseases_category

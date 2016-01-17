@@ -1,5 +1,6 @@
 class V1::SessionsController < Devise::SessionsController
-  prepend_before_filter :require_no_authentication, :only => [:create]
+  skip_before_filter :verify_authenticity_token, only: [:create]
+  # prepend_before_filter :require_no_authentication, :only => [:create]
   skip_before_filter :verify_signed_out_user, only: :destroy
   acts_as_token_authentication_handler_for User
 
@@ -62,7 +63,7 @@ class V1::SessionsController < Devise::SessionsController
       # image: {
       #     fullsizeUrl: user.image.url,
       #     thumbnailUrl: user.image.thumb.url },
-      roles: user.user_roles.pluck(:name),
+      roles: user.user_roles.pluck(:name).join(', '),
       birthday: user.birthday.to_i,
       gender: user.gender,
       blood_pressure: user.blood_pressure,

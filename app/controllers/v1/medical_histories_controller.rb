@@ -1,13 +1,12 @@
 class V1::MedicalHistoriesController < ApplicationController
-  # acts_as_token_authentication_handler_for User
-  skip_before_filter :verify_authenticity_token
+  acts_as_token_authentication_handler_for User
   respond_to :json
 
   # GET /1.0/medical_histories/create {format: json}
   # create new histories
   def create
     history = MedicalHistory.new(medical_history_params)
-    history.user_id = User.last.id
+    history.user_id = current_user.id
 
     if history.save
       history.symptoms << Symptom.where(id: params[:symptoms]) if params[:symptoms]

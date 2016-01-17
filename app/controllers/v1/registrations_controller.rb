@@ -109,7 +109,7 @@ class V1::RegistrationsController < Devise::RegistrationsController
       # image: {
       #     fullsizeUrl: user.image.url,
       #     thumbnailUrl: user.image.thumb.url },
-      roles: user.user_roles.pluck(:name),
+      roles: user.user_roles.pluck(:name).join(', '),
       birthday: user.birthday.to_i,
       gender: user.gender,
       blood_pressure: user.blood_pressure,

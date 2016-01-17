@@ -1,6 +1,6 @@
 class V1::SessionsController < Devise::SessionsController
   prepend_before_filter :require_no_authentication, :only => [:create]
-  # skip_before_filter :verify_signed_out_user, only: :destroy
+  skip_before_filter :verify_signed_out_user, only: :destroy
   acts_as_token_authentication_handler_for User
 
   respond_to :json

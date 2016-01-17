@@ -20,6 +20,10 @@
 #  fname                  :string(255)
 #  lname                  :string(255)
 #  uid                    :string(255)
+#  birthday               :datetime
+#  blood_pressure         :string(255)
+#  growth                 :string(255)
+#  weight                 :integer
 #
 
 class User < ActiveRecord::Base
@@ -43,6 +47,8 @@ class User < ActiveRecord::Base
   has_one :address
 
   has_and_belongs_to_many :user_roles, :uniq => true
+
+  accepts_nested_attributes_for :address
 
   def to_param
     uid

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160116221427) do
+ActiveRecord::Schema.define(version: 20160117000802) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -41,6 +41,23 @@ ActiveRecord::Schema.define(version: 20160116221427) do
 
   add_index "countries", ["code"], name: "countries_code_id", using: :btree
 
+  create_table "diseases_categories", force: true do |t|
+    t.string "name"
+    t.string "doctors_category_id"
+  end
+
+  create_table "doctors_categories", force: true do |t|
+    t.string "name"
+  end
+
+  create_table "medical_histories", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "diseases_category_id"
+    t.text     "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "states", force: true do |t|
     t.integer  "country_id"
     t.string   "code"
@@ -55,6 +72,13 @@ ActiveRecord::Schema.define(version: 20160116221427) do
 
   add_index "states", ["code"], name: "states_code_id", using: :btree
   add_index "states", ["country_id"], name: "states_country_id", using: :btree
+
+  create_table "symptoms", force: true do |t|
+    t.string   "name"
+    t.integer  "diseases_category_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "user_roles", force: true do |t|
     t.string   "name"
@@ -88,6 +112,7 @@ ActiveRecord::Schema.define(version: 20160116221427) do
     t.datetime "birthday"
     t.string   "blood_pressure"
     t.string   "growth"
+    t.integer  "weight"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

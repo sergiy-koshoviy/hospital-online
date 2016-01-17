@@ -62,9 +62,10 @@ Rails.application.routes.draw do
     # Autorization and registration
     devise_scope :user do
       post 'users/login' => 'sessions#create', :as => 'login'
-      get 'users/self/profile' => 'sessions#show', :as => 'logout'
+      post 'users/logout' => 'sessions#destroy', :as => 'logout'
+      get 'users/self/profile' => 'sessions#show', :as => 'accout'
       post 'users/signup' => 'registrations#create', :as => 'signup'
-      put 'users/update' => 'registrations#update', :as => 'update'
+      post 'users/update_profile' => 'registrations#update_profile', :as => 'update'
     end
   end
 end

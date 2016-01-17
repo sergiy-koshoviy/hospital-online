@@ -15,18 +15,7 @@ class V1::RegistrationsController < Devise::RegistrationsController
     if user.save
       user.user_roles << UserRole.where(name: params[:user_roles])
 
-      render json: { token: user.authentication_token,
-                     id: user.id,
-                     firstName: user.fname,
-                     lastName: user.lname,
-                     email: user.email,
-                     # image: {
-                     #     fullsizeUrl: user.image.url,
-                     #     thumbnailUrl: user.image.thumb.url },
-                     roles: user.user_roles.pluck(:name),
-                     birthday: user.user_roles.pluck(:name),
-                     gender: user.gender
-             }, status: 201
+      render json: get_user_data(user), status: 201
 
     elsif user.errors[:email].present? and user.errors[:email][0] == "has already been taken"
       taken_email_password_attempt
@@ -48,27 +37,12 @@ class V1::RegistrationsController < Devise::RegistrationsController
     end
   end
 
-  def update
-    update_params = {}
-    update_params[:growth] = params[:growth] if params[:growth]
-    update_params[:growth] = params[:blood_pressure] if params[:blood_pressure]
+  def update_profile
+    user = User.last
 
-    user = current_user
-
-    if update_params && user.update_attributes(update_params)
-      render json: { token: user.authentication_token,
-                     id: user.id,
-                     firstName: user.fname,
-                     lastName: user.lname,
-                     email: user.email,
-                     # image: {
-                     #     fullsizeUrl: user.image.url,
-                     #     thumbnailUrl: user.image.thumb.url },
-                     roles: user.user_roles.pluck(:name),
-                     birthday: user.user_roles.pluck(:name),
-                     gender: user.gender
-             }, status: 201
-    elsif update_params.blank?
+    if user_params.present? && user.update_attributes(user_params)
+      render json: get_user_data(user), status: 201
+    elsif user_params.blank?
       warden.custom_failure!
       render :json => { :errors => 'Params are blank', :code => 16},  :status=>422, :success => false
     else
@@ -123,5 +97,28 @@ class V1::RegistrationsController < Devise::RegistrationsController
     render :status => 422,
            :json => { :errors => "Gender a required parameter for the request", :code => 15 },
            :success => false
+  end
+
+  def get_user_data(user)
+    {
+      token: user.authentication_token,
+      id: user.id,
+      firstName: user.fname,
+      lastName: user.lname,
+      email: user.email,
+      # image: {
+      #     fullsizeUrl: user.image.url,
+      #     thumbnailUrl: user.image.thumb.url },
+      roles: user.user_roles.pluck(:name),
+      birthday: user.birthday,
+      gender: user.gender,
+      blood_pressure: user.blood_pressure,
+      growth: user.growth,
+      weight: user.weight
+    }
+  end
+
+  def user_params
+    params.require(:user).permit(:fname, :lname, :email, :password, :birthday, :gender, :growth, :blood_pressure, :address_attributes)
   end
 end

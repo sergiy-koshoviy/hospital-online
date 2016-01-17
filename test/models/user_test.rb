@@ -20,6 +20,10 @@
 #  fname                  :string(255)
 #  lname                  :string(255)
 #  uid                    :string(255)
+#  birthday               :datetime
+#  blood_pressure         :string(255)
+#  growth                 :string(255)
+#  weight                 :integer
 #
 
 require 'test_helper'

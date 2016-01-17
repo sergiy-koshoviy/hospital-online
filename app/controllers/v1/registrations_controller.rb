@@ -1,5 +1,5 @@
 class V1::RegistrationsController < Devise::RegistrationsController
-  skip_before_filter :verify_authenticity_token, only: [:create]
+  skip_before_filter :verify_authenticity_token, only: [:create, :update_profile]
 
   respond_to :json
 
@@ -110,7 +110,7 @@ class V1::RegistrationsController < Devise::RegistrationsController
       #     fullsizeUrl: user.image.url,
       #     thumbnailUrl: user.image.thumb.url },
       roles: user.user_roles.pluck(:name),
-      birthday: user.birthday,
+      birthday: user.birthday.to_i,
       gender: user.gender,
       blood_pressure: user.blood_pressure,
       growth: user.growth,

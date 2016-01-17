@@ -1,6 +1,6 @@
 class V1::SessionsController < Devise::SessionsController
   prepend_before_filter :require_no_authentication, :only => [:create]
-  skip_before_filter :verify_signed_out_user, only: :destroy
+  # skip_before_filter :verify_signed_out_user, only: :destroy
   acts_as_token_authentication_handler_for User
 
   respond_to :json
@@ -53,16 +53,21 @@ class V1::SessionsController < Devise::SessionsController
   private
 
   def get_user_data(user)
-    { token: user.authentication_token,
+    {
+      token: user.authentication_token,
       id: user.id,
       firstName: user.fname,
       lastName: user.lname,
       email: user.email,
       # image: {
-      #     :fullsizeUrl => user.image.url,
-      #     :thumbnailUrl => user.image.try(:thumb).try(:url) },
+      #     fullsizeUrl: user.image.url,
+      #     thumbnailUrl: user.image.thumb.url },
       roles: user.user_roles.pluck(:name),
-      gender: user.gender
+      birthday: user.birthday.to_i,
+      gender: user.gender,
+      blood_pressure: user.blood_pressure,
+      growth: user.growth,
+      weight: user.weight
     }
   end
 

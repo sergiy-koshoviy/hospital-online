@@ -2,7 +2,7 @@ class V1::MedicalHistoriesController < ApplicationController
   acts_as_token_authentication_handler_for User
   respond_to :json
 
-  # GET /1.0/medical_histories/create {format: json}
+  # POST /1.0/medical_histories/create {format: json}
   # create new histories
   def create
     history = MedicalHistory.new(medical_history_params)
@@ -14,6 +14,12 @@ class V1::MedicalHistoriesController < ApplicationController
     else
       render :json => { :errors => history.errors},  :status=>422, :success => false
     end
+  end
+
+  # GET /1.0/medical_histories {format: json}
+  # get medical_histories lists
+  def list
+    render json: current_user.medical_histories, status: 201
   end
 
   private

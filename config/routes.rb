@@ -69,5 +69,9 @@ Rails.application.routes.draw do
 
     # resources :medical_histories
     post 'medical_histories/create' => 'medical_histories#create'
+    get 'medical_histories' => 'medical_histories#list'
+    get 'doctors_categories' => 'doctors_categories#list'
+    get 'diseases_categories' => 'diseases_categories#all_list'
+    get 'diseases_categories/:doctors_category_id' => 'diseases_categories#get_list_by_doctors_category'
   end
 end

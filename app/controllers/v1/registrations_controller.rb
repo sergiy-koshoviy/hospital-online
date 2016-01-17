@@ -13,7 +13,7 @@ class V1::RegistrationsController < Devise::RegistrationsController
                     gender: params[:gender]
     )
     if user.save
-      user.user_roles << UserRole.where(name: params[:user_roles])
+      user.user_roles << UserRole.where(name: params[:user_roles].split(', '))
 
       render json: get_user_data(user), status: 201
 

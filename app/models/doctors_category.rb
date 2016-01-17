@@ -8,4 +8,5 @@
 
 class DoctorsCategory < ActiveRecord::Base
   has_many :diseases_categories
+  has_many :doctors
 end

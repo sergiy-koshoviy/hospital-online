@@ -73,5 +73,6 @@ Rails.application.routes.draw do
     get 'doctors_categories' => 'doctors_categories#list'
     get 'diseases_categories' => 'diseases_categories#all_list'
     get 'diseases_categories/:doctors_category_id' => 'diseases_categories#get_list_by_doctors_category'
+    get 'doctors/:doctors_category_id' => 'doctors#get_list_by_doctors_category'
   end
 end

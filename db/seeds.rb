@@ -37,3 +37,15 @@ diseases_categories.each do |category|
   diseases_category = DiseasesCategory.find_by_name(category[:name])
   DiseasesCategory.create(category) unless diseases_category
 end
+
+
+doctors = [
+    {name: 'Will Smith', doctors_category_id:doctors_category_id, address: '740 Teall Ave,Syracuse, NY 13206, USA'},
+    {name: 'Mike Thompson', doctors_category_id:doctors_category_id, address: '15 Sudbury St,Boston, MA 02203, USA'},
+    {name: 'Chuck Norris', doctors_category_id:doctors_category_id, address: '422 W 2nd St,Grand Island, NE 68801, USA'}
+]
+
+doctors.each do |doctor|
+    current_doctor = Doctor.find_by_name(doctor[:name])
+    Doctor.create(doctor) unless current_doctor
+end
